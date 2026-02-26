@@ -1080,5 +1080,15 @@ if(vsc){vsc.addEventListener('mousemove',e=>{const r=vsc.getBoundingClientRect()
 // ── Keyboard shortcuts ──
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('dashboard-page').classList.contains('active')){}});
 </script>
+
+<script>
+// Keep backend alive - ping every 5 minutes
+setInterval(() => {
+  fetch('https://vault-secure-backend.onrender.com/health')
+    .catch(() => {});
+}, 5 * 60 * 1000);
+// Wake up backend immediately on page load
+fetch('https://vault-secure-backend.onrender.com/health').catch(() => {});
+</script>
 </body>
 </html>
